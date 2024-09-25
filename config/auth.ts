@@ -20,37 +20,37 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     GitHubProvider({
-      profile(profile) {
-        return {
-          id: profile.id.toString(),
-          name: profile.name || profile.login,
-          firstName: profile.name?.split(" ")[0] || "",
-          lastName: profile.name?.split(" ")[1] || "",
-          phone: "",
-          image: profile.avatar_url,
-          email: profile.email,
-          role: "USER",
-        };
-      },
+      // profile(profile) {
+      //   return {
+      //     id: profile.id.toString(),
+      //     name: profile.name || profile.login,
+      //     firstName: profile.name?.split(" ")[0] || "",
+      //     lastName: profile.name?.split(" ")[1] || "",
+      //     phone: "",
+      //     image: profile.avatar_url,
+      //     email: profile.email,
+      //     role: "USER",
+      //   };
+      // },
       clientId: process.env.GITHUB_CLIENT_ID || "",
       clientSecret: process.env.GITHUB_SECRET || "",
     }),
-    GoogleProvider({
-      profile(profile) {
-        return {
-          id: profile.sub,
-          name: `${profile.given_name} ${profile.family_name}`,
-          firstName: profile.given_name,
-          lastName: profile.family_name,
-          phone: "",
-          image: profile.picture,
-          email: profile.email,
-          role: "USER",
-        };
-      },
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-    }),
+    // GoogleProvider({
+    //   profile(profile) {
+    //     return {
+    //       id: profile.sub,
+    //       name: `${profile.given_name} ${profile.family_name}`,
+    //       firstName: profile.given_name,
+    //       lastName: profile.family_name,
+    //       phone: "",
+    //       image: profile.picture,
+    //       email: profile.email,
+    //       role: "USER",
+    //     };
+    //   },
+    //   clientId: process.env.GOOGLE_CLIENT_ID || "",
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    // }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {

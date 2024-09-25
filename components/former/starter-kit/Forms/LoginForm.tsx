@@ -8,11 +8,12 @@ import { LoginProps } from "@/types/types";
 import toast from "react-hot-toast";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { Button } from "../ui/button";
+ 
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import TextInput from "../FormInputs/TextInput";
 import PasswordInput from "../FormInputs/PasswordInput";
 import SubmitButton from "../FormInputs/SubmitButton";
+import { Button } from "@/components/ui/button";
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const {

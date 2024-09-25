@@ -11,10 +11,11 @@ import { useRouter } from "next/navigation";
 import TextInput from "../FormInputs/TextInput";
 import PasswordInput from "../FormInputs/PasswordInput";
 import SubmitButton from "../FormInputs/SubmitButton";
-import { Button } from "../ui/button";
+ 
 import { FaGithub, FaGitter, FaGoogle } from "react-icons/fa";
 import { createUser } from "@/actions/users";
 import { signIn } from "next-auth/react";
+import { Button } from "@/components/ui/button";
 export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
   const [emailErr, setEmailErr] = useState<string | null>(null);

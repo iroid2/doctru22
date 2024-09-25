@@ -36,11 +36,12 @@ import { useState } from "react";
 
 import SearchBar from "./SearchBar";
 import { DataTableViewOptions } from "./DataTableViewOptions";
-import { Button } from "../ui/button";
+ 
 import { ListFilter } from "lucide-react";
 import DateFilters from "./DateFilters";
 import DateRangeFilter from "./DateRangeFilter";
 import { DataTablePagination } from "./DataTablePagination";
+import { Button } from "@/components/ui/button";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

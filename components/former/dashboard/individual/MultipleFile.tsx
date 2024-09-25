@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { UploadButton } from "@/utils/uploadthing";
+// import { UploadButton } from "@/utils/uploadthing";
  
 import Image from "next/image";
 import React from "react";
@@ -45,7 +45,7 @@ return (
           );
         })}
       </div>
-      <UploadButton
+      {/* <UploadButton
         className="col-span-full"
         endpoint={endpoint}
         onClientUploadComplete={(res:any) => {
@@ -60,7 +60,7 @@ return (
           // Do something with the error.
           alert(`ERROR! ${error.message}`);
         }}
-      />
+      /> */}
     </div>
   </CardContent>
 </Card>
