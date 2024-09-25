@@ -7,6 +7,7 @@ export type CategoryProps = {
 export type UserProps = {
   name: string;
   firstName: string;
+  username:string;
   lastName: string;
   phone: string;
   image: string;

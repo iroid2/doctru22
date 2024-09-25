@@ -9,10 +9,7 @@ generator client {
   provider = "prisma-client-js"
 }
  
-datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
-}
+ 
  
 model Account {
   id                String  @id @default(auto()) @map("_id") @db.ObjectId
@@ -41,31 +38,8 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
  
-enum UserRole {
-  USER
-  ADMIN
-  SERVICE_PROVIDER
-}
  
-model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  name          String
-  firstName          String
-  lastName          String
-  phone          String
-  email         String   @unique
-  emailVerified DateTime?
-  image         String?
-  role          UserRole  @default(USER)
-  password      String?
-  status Boolean @default(true)
-  accounts      Account[]
-  sessions      Session[]
-  isVerfied     Boolean   @default(false)
-  token         Int?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-}
+
  
  
  
@@ -80,4 +54,86 @@ model Category {
   updatedAt DateTime? @updatedAt
 }
 
+
+ 
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// Enum for user roles
+enum UserRole {
+  INDIVIDUAL          // Normal User who creates documents
+  SECRETARY           // Secretary who approves/rejects documents
+  HEAD_OF_DEPARTMENT  // Head of Department who approves documents after Secretary
+}
+
+// Enum for document status
+enum DocumentStatus {
+  PENDING      // Waiting for approval (Secretary or Head)
+  APPROVED     // Approved by either Secretary or Head
+  REJECTED     // Rejected by Secretary or Head
+}
+
+// Enum for workflow steps
+enum Step {
+  NORMAL_USER        // Initial step for a document created by a user
+  SECRETARY          // Step when Secretary needs to approve
+  HEAD_OF_DEPARTMENT // Step when Head of Department needs to approve
+}
+
+//  model User {
+//   id            String          @id @default(auto()) @map("_id") @db.ObjectId
+//   email         String          @unique
+//   username      String          @unique
+//   password      String
+//   fullName      String
+  
+//   role          Role            @default(INDIVIDUAL)
+//   createdAt     DateTime        @default(now())
+//   updatedAt     DateTime?       @updatedAt
+//   // documents     Document[]      @relation("DocumentOwner")
+//   // documentFlows DocumentFlow[]  @relation("FlowUser")
+// }
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  firstName     String
+  lastName          String
+  phone          String
+  email         String   @unique
+  emailVerified DateTime?
+  image         String?
+  role          UserRole  @default(INDIVIDUAL)
+  password      String?
+  documents     Document[]     
+  status Boolean @default(true)
+  accounts      Account[]
+  sessions      Session[]
+  isVerfied     Boolean   @default(false)
+  token         Int?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// Document model representing the document flow through various roles
+model Document {
+  id             String          @id @default(auto()) @map("_id") @db.ObjectId
+  title          String
+  description    String
+  documentLink   String        // Store multiple document links (files)
+  status         DocumentStatus  @default(PENDING)
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String          @db.ObjectId
+
+  currentStep    Step            @default(NORMAL_USER) // Tracks the current stage in the flow
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+
+ 
+ 
  
