@@ -78,7 +78,7 @@ enum DocumentStatus {
 
 // Enum for workflow steps
 enum Step {
-  NORMAL_USER        // Initial step for a document created by a user
+  INDIVIDUAL        // Initial step for a document created by a user
   SECRETARY          // Step when Secretary needs to approve
   HEAD_OF_DEPARTMENT // Step when Head of Department needs to approve
 }
@@ -122,13 +122,13 @@ model Document {
   id             String          @id @default(auto()) @map("_id") @db.ObjectId
   title          String
   description    String
-  documentLink   String        // Store multiple document links (files)
+  documentLink   String  @default("https://utfs.io/f/979c3998-9e67-4f23-8c8b-c22facfdca8e-2x9.pdf")     // Store multiple document links (files)
   status         DocumentStatus  @default(PENDING)
   
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId         String          @db.ObjectId
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String?          @db.ObjectId
 
-  currentStep    Step            @default(NORMAL_USER) // Tracks the current stage in the flow
+  currentStep    Step            @default(INDIVIDUAL) // Tracks the current stage in the flow
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
 }

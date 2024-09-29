@@ -5,8 +5,9 @@ import { db } from "@/prisma/db";
 import { UserProps } from "@/types/types";
 import bcrypt from "bcrypt";
 import { revalidatePath } from "next/cache";
+import { UserRole } from "@prisma/client";
 export async function createUser(data: UserProps) {
-  const { email, password, firstName,lastName, name, phone, image } = data;
+  const { email, password, firstName,lastName, name, phone, image ,role} = data;
   try {
     // Hash the PAASWORD
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -26,7 +27,7 @@ export async function createUser(data: UserProps) {
       data: {
         email,
         password: hashedPassword,
-         firstName,lastName,name, phone, image
+         firstName,lastName,name, phone, image,role:role as UserRole
       },
     });
     // revalidatePath("/dashboard/users");

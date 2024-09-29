@@ -5,6 +5,7 @@ export type CategoryProps = {
   description: string;
 };
 export type UserProps = {
+  role: string;
   name: string;
   firstName: string;
   username:string;

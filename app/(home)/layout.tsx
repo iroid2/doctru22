@@ -3,8 +3,11 @@ import { SiteBanner } from "@/components/frontend/site-banner";
 import Footer from "@/components/frontend/site-footer";
 import SiteHeader from "@/components/frontend/site-header";
 import { authOptions } from "@/config/auth";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { getServerSession } from "next-auth";
 import React, { ReactNode } from "react";
+import { ourFileRouter } from "../api/uploadthing/core";
+import { extractRouterConfig } from "uploadthing/server";
 
 export default async function HomeLayout({
   children,
@@ -14,6 +17,15 @@ export default async function HomeLayout({
   const session = await getServerSession(authOptions);
   return (
     <div className="bg-white">
+      <NextSSRPlugin
+          /**
+           * The `extractRouterConfig` will extract **only** the route configs
+           * from the router to prevent additional information from being
+           * leaked to the client. The data passed to the client is the same
+           * as if you were to fetch `/api/uploadthing` directly.
+           */
+          routerConfig={extractRouterConfig(ourFileRouter)}
+        />
       <PromoBanner />
       {/* <SiteBanner /> */}
       <SiteHeader session={session} />

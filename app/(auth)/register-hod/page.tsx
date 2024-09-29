@@ -5,7 +5,7 @@ export default function page() {
   // INDIVIDUAL          // Normal User who creates documents
   // SECRETARY           // Secretary who approves/rejects documents
   // HEAD_OF_DEPARTMENT
-  const role = "INDIVIDUAL";
+  const role = "HEAD_OF_DEPARTMENT";
   return (
     <section>
       <div className="md:container px-4 md:px-0">
