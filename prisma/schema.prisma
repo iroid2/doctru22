@@ -76,26 +76,6 @@ enum DocumentStatus {
   REJECTED     // Rejected by Secretary or Head
 }
 
-// Enum for workflow steps
-enum Step {
-  INDIVIDUAL        // Initial step for a document created by a user
-  SECRETARY          // Step when Secretary needs to approve
-  HEAD_OF_DEPARTMENT // Step when Head of Department needs to approve
-}
-
-//  model User {
-//   id            String          @id @default(auto()) @map("_id") @db.ObjectId
-//   email         String          @unique
-//   username      String          @unique
-//   password      String
-//   fullName      String
-  
-//   role          Role            @default(INDIVIDUAL)
-//   createdAt     DateTime        @default(now())
-//   updatedAt     DateTime?       @updatedAt
-//   // documents     Document[]      @relation("DocumentOwner")
-//   // documentFlows DocumentFlow[]  @relation("FlowUser")
-// }
 model User {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String
@@ -122,13 +102,13 @@ model Document {
   id             String          @id @default(auto()) @map("_id") @db.ObjectId
   title          String
   description    String
-  documentLink   String  @default("https://utfs.io/f/979c3998-9e67-4f23-8c8b-c22facfdca8e-2x9.pdf")     // Store multiple document links (files)
-  status         DocumentStatus  @default(PENDING)
-  
+  documentLink   String 
+  hodStatus         Boolean @default(false)
+  secretaryStatus   Boolean @default(false)
+  documentStatus    DocumentStatus @default(PENDING)
   user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId         String?          @db.ObjectId
-
-  currentStep    Step            @default(INDIVIDUAL) // Tracks the current stage in the flow
+  userId         String? @db.ObjectId
+  rejectedBy     String?
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
 }

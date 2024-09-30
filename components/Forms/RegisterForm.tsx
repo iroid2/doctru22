@@ -15,7 +15,7 @@ import { Button } from "../ui/button";
 import { FaGithub, FaGitter, FaGoogle } from "react-icons/fa";
 import { createUser } from "@/actions/users";
 import { signIn } from "next-auth/react";
-export default function RegisterForm({ role }: { role: string }) {
+export default function RegisterForm({ role }: { role?: string }) {
   const [loading, setLoading] = useState(false);
   const [emailErr, setEmailErr] = useState<string | null>(null);
   const {
@@ -26,7 +26,7 @@ export default function RegisterForm({ role }: { role: string }) {
   } = useForm<UserProps>();
   const router = useRouter();
   async function onSubmit(data: UserProps) {
-    data.role = role;
+    // data.role = role;
     setLoading(true);
     data.name = `${data.firstName} ${data.lastName}`;
     data.image =

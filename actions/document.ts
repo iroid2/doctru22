@@ -3,14 +3,17 @@ import { db } from "@/prisma/db";
 
 export async function createDocument(data:any) {
     console.log(data)
-     const {title,description,documentLink,currentStep} = data
+     const {title,description,documentLink,hodStatus,         
+      secretaryStatus, userId,documentStatus} = data
      const document = await db.document.create({
         data:{
             title,
             description,
             documentLink,
-            // userId,
-            currentStep : "INDIVIDUAL",
+            hodStatus,         
+            secretaryStatus, 
+            documentStatus,   
+            userId
             // status:DocumentStatus.PENDING   
         }
      }) 
