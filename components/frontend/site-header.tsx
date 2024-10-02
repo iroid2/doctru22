@@ -116,7 +116,7 @@ export default function SiteHeader({ session }: { session: Session | null }) {
               <div className="py-6">
                 {session ? (
                   <Button asChild variant={"ghost"}>
-                    <Link href="/dashboard">
+                    <Link href="/dashboard/userdashboard">
                       <Avatar>
                         <AvatarImage
                           src={session?.user?.image ?? ""}

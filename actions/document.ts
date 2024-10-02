@@ -21,7 +21,8 @@ export async function createDocument(data: CreateDocumentData) {
             title,
             description,
             documentLink,
-            qrCode,  // This will now be recognized by TypeScript
+            // Remove or comment out the qrCode line
+            // qrCode: qrCode as unknown as string,
             userId,
             hodStatus: false,
             secretaryStatus: false,
