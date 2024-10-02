@@ -3,14 +3,25 @@
 import { db } from "@/prisma/db";
 import { DocumentStatus } from "@prisma/client";
 
+
+// / Define the type for the incoming data
+interface CreateDocumentData {
+  title: string;
+  description: string;
+  qrCode?: string;  // Make qrCode optional if it's not always present
+  documentLink: string;
+  userId: string;
+}
+
 // Create a new document
-export async function createDocument(data: any) {
-    const { title, description, documentLink, userId } = data;
+export async function createDocument(data: CreateDocumentData) {
+    const { title, description, qrCode, documentLink, userId } = data;
     const document = await db.document.create({
         data: {
             title,
             description,
             documentLink,
+            qrCode,  // This will now be recognized by TypeScript
             userId,
             hodStatus: false,
             secretaryStatus: false,

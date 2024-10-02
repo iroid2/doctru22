@@ -103,6 +103,7 @@ model Document {
   title          String
   description    String
   documentLink   String 
+  qrCode        String?
   hodStatus         Boolean @default(false)
   secretaryStatus   Boolean @default(false)
   documentStatus    DocumentStatus @default(PENDING)

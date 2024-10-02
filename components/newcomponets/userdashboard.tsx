@@ -125,6 +125,10 @@ export default function IndividualDashboardV3({allDocuments}:{allDocuments:any})
                       <p className="text-sm text-gray-500">Submitted on {new Date(req.createdAt).toLocaleDateString()}</p>
                     </div>
                   </div>
+                  <div className="mt-4">
+                
+                <img src={req.qrCode} className="w-24 h-25" alt="QR Code" />
+              </div>
                   <Badge>{req.documentStatus}</Badge>
                 </div>
               ))}
