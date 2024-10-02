@@ -4,11 +4,11 @@ import { CalendarIcon, CheckCircle, FileTextIcon, UserIcon, X } from "lucide-rea
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { approveBySecretary, rejectBySecretary } from "@/actions/document";
+import { approveByHod, rejectBySecretary } from "@/actions/document";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
 
-export default function DocumentInfo({ document }: { document: any }) {
+export default function HodocumentInfo({ document }: { document: any }) {
   // Convert date to string
   const date = document.createdAt.toISOString().split("T")[0];
 
@@ -22,7 +22,7 @@ export default function DocumentInfo({ document }: { document: any }) {
   const handleApprove = async () => {
     setLoadingApprove(true);
     try {
-      const updatedDocument = await approveBySecretary(document.id);
+      const updatedDocument = await approveByHod(document.id);
 
       if (updatedDocument) {
         toast.success("Document approved successfully!");

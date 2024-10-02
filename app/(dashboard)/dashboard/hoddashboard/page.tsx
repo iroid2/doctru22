@@ -1,11 +1,15 @@
-import HODDashboard from '@/components/newcomponets/hoddashboard'
+
  
+import { getAllDocuments } from '@/actions/document';
+import HODDashboard from '@/components/newcomponets/hoddashboard'
 import React from 'react'
 
-export default function page() {
+export default async function page() {
+  const documents = await getAllDocuments();
+  const allDocuments = documents.filter((document: any) => document.secretaryStatus === true);
   return (
     <div>
-        <HODDashboard/>
+        <HODDashboard allDocuments={allDocuments}/>
     </div>
   )
 }

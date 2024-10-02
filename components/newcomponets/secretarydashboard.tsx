@@ -86,84 +86,25 @@ export default function UnderSecretaryDashboard({ allDocuments }: { allDocuments
                       <h3 className="font-semibold">{req.title}</h3>
                       <p className="text-sm text-gray-500">Submitted by {req.user.name} on {req.submittedDate}</p>
                     </div>
-                    <Badge>Pending</Badge>
+                    <Badge>{req.documentStatus}</Badge>
                   </div>
                   <div className="flex space-x-2 mt-2">
                     <Link href={`/dashboard/secretarydashboard/requisitions/${req.id}`} className='flex gap-1 bg-slate-800 rounded-lg justify-center items-center text-white px-4 py-2'>
                       <Eye className="" />
                       View
                     </Link>
-                    <Button size="sm" variant="outline" onClick={() => handleApprove(req.id)}>
+                    {/* <Button size="sm" variant="outline" onClick={() => handleApprove(req.id)}>
                       <CheckCircle className="h-4 w-4 mr-2" />
                       Approve
                     </Button>
                     <Button size="sm" variant="outline" onClick={() => handleReject(req.id)}>
                       <XCircle className="h-4 w-4 mr-2" />
                       Reject
-                    </Button>
+                    </Button> */}
                   </div>
                 </div>
               ))}
             </ScrollArea>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Requisition Details</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {/* <DocumentInfo/> */}
-            {/* {selectedRequisition ? (
-              <DocumentInfo/>
-              // <Tabs defaultValue="details">
-              //   <TabsList>
-              //     <TabsTrigger value="details">Details</TabsTrigger>
-              //     <TabsTrigger value="timeline">Timeline</TabsTrigger>
-              //   </TabsList>
-              //   <TabsContent value="details">
-              //     <div className="space-y-4">
-              //       <div>
-              //         <h3 className="font-semibold">{selectedRequisition.title}</h3>
-              //         <p className="text-sm text-gray-500">Submitted by {selectedRequisition.submitter} on {selectedRequisition.submittedDate}</p>
-              //       </div>
-              //       <div>
-              //         <h4 className="font-semibold">Description</h4>
-              //         <p>{selectedRequisition.description}</p>
-              //       </div>
-              //       <div className="flex space-x-2">
-              //         <Button onClick={() => handleApprove(selectedRequisition.id)}>Approve</Button>
-              //         <Button variant="outline" onClick={() => handleReject(selectedRequisition.id)}>Reject</Button>
-              //       </div>
-              //     </div>
-              //   </TabsContent>
-              //   <TabsContent value="timeline">
-              //     <ScrollArea className="h-[300px]">
-              //       {selectedRequisition.timeline.map((event, index) => (
-              //         <div key={index} className="flex items-start mb-4">
-              //           <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 mr-4">
-              //             {event.action === 'Submitted' ? (
-              //               <FileText className="h-4 w-4 text-blue-600" />
-              //             ) : (
-              //               <Clock className="h-4 w-4 text-blue-600" />
-              //             )}
-              //           </div>
-              //           <div>
-              //             <p className="font-semibold">{event.action}</p>
-              //             <p className="text-sm text-gray-500">{event.date}</p>
-              //             <p className="text-sm">{event.user}</p>
-              //           </div>
-              //         </div>
-              //       ))}
-              //     </ScrollArea>
-              //   </TabsContent>
-              // </Tabs>
-            ) : (
-              <div className="flex flex-col items-center justify-center h-[300px] text-center">
-                <FileText className="h-16 w-16 text-gray-400 mb-4" />
-                <p className="text-gray-500">Select a requisition to view details</p>
-              </div>
-            )} */}
           </CardContent>
         </Card>
       </div>

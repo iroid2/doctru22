@@ -57,6 +57,26 @@ export async function approveBySecretary(documentId: string) {
         throw new Error("Approval failed.");
     }
 }
+// hod approves
+export async function approveByHod(documentId: string) {
+    try {
+        // Update the document's status as approved by secretary
+        const updatedDocument = await db.document.update({
+            where: {
+                id: documentId,
+            },
+            data: {
+                hodStatus: true,
+                documentStatus: DocumentStatus.APPROVED, // Still pending, HOD needs to approve
+            },
+        });
+        return updatedDocument;
+    } catch (error) {
+        console.log("Error approving document by Secretary:", error);
+        throw new Error("Approval failed.");
+    }
+}
+// secretary rejects the documents
 export async function rejectBySecretary(documentId: string) {
     try {
         // Update the document's status as approved by secretary
@@ -76,43 +96,7 @@ export async function rejectBySecretary(documentId: string) {
     }
 }
 
-// HOD approves the document
-export async function approveByHOD(documentId: string) {
-    try {
-        // Update the document's status as approved by HOD
-        const updatedDocument = await db.document.update({
-            where: {
-                id: documentId,
-            },
-            data: {
-                hodStatus: true,
-                documentStatus: DocumentStatus.APPROVED, // Final approval
-            },
-        });
-        return updatedDocument;
-    } catch (error) {
-        console.log("Error approving document by HOD:", error);
-        throw new Error("Approval by HOD failed.");
-    }
-}
 
-// Secretary or HOD rejects the document
-export async function rejectDocument(documentId: string) {
-    try {
-        const updatedDocument = await db.document.update({
-            where: {
-                id: documentId,
-            },
-            data: {
-                documentStatus: DocumentStatus.REJECTED,
-            },
-        });
-        return updatedDocument;
-    } catch (error) {
-        console.log("Error rejecting document:", error);
-        throw new Error("Rejection failed.");
-    }
-}
 
 export async function getDocumentById(documentId: string) {
     try {
