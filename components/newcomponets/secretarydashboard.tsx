@@ -80,11 +80,12 @@ export default function UnderSecretaryDashboard({ allDocuments }: { allDocuments
           <CardContent>
             <ScrollArea className="h-[400px]">
               {filteredRequisitions.map((req: any) => (
+                
                 <div key={req.id} className="mb-4 p-4 border rounded-lg">
                   <div className="flex justify-between items-start mb-2">
                     <div>
                       <h3 className="font-semibold">{req.title}</h3>
-                      <p className="text-sm text-gray-500">Submitted by {req.user.name} on {req.submittedDate}</p>
+                      <p className="text-sm text-gray-500">Submitted by kkfkfk on </p>
                     </div>
                     <Badge>{req.documentStatus}</Badge>
                   </div>

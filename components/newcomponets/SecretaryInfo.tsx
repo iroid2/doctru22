@@ -4,12 +4,11 @@ import { CalendarIcon, CheckCircle, FileTextIcon, UserIcon, X } from "lucide-rea
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { approveBySecretary, rejectBySecretary } from "@/actions/document";
+import { approveByHod, rejectBySecretary } from "@/actions/document";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
-import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 
-export default function DocumentInfo({ document }: { document: any }) {
+export default function secretaryInfo({ document }: { document: any }) {
   // Convert date to string
   const date = document.createdAt.toISOString().split("T")[0];
 
@@ -23,7 +22,7 @@ export default function DocumentInfo({ document }: { document: any }) {
   const handleApprove = async () => {
     setLoadingApprove(true);
     try {
-      const updatedDocument = await approveBySecretary(document.id);
+      const updatedDocument = await approveByHod(document.id);
 
       if (updatedDocument) {
         toast.success("Document approved successfully!");
@@ -72,12 +71,6 @@ export default function DocumentInfo({ document }: { document: any }) {
             <FileTextIcon className="inline-block w-4 h-4 mr-1" />
             View Document
           </Link>
-          <div className="mt-4">
-        
-          <img src={document.qrCode} alt="QR Code"/>
-       
-                
-              </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
@@ -113,7 +106,7 @@ export default function DocumentInfo({ document }: { document: any }) {
         <div className="grid gap-2">
           <div className="flex items-center">
             <UserIcon className="w-4 h-4 mr-2" />
-            <span className="text-sm">Created by: user</span>
+            <span className="text-sm">Created by: {document.user.name}</span>
           </div>
           <div className="flex items-center">
             <CalendarIcon className="w-4 h-4 mr-2" />

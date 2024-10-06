@@ -25,11 +25,7 @@ import AuthenticatedAvatar from "@/components/global/AuthenticatedAvatar";
 
 export default function SiteHeader({ session }: { session: Session | null }) {
   const navigation = [
-    { name: "Products", href: "/products" },
-    { name: "Solutions", href: "/solutions" },
-    { name: "Resources", href: "/resources" },
-    { name: "Docs", href: "/docs" },
-    { name: "Pricing", href: "/pricing" },
+    { name: "", href: "/f" }
   ];
   const router = useRouter();
   async function handleLogout() {
@@ -42,13 +38,13 @@ export default function SiteHeader({ session }: { session: Session | null }) {
   }
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
-    <header className="fixed top-0 left-0   right-0 z-50 px-4 lg:px-6 h-16  items-center bg-white bg-opacity-80 backdrop-blur-md shadow-sm mt-8">
+    <header className="fixed top-0 left-0   right-0 z-50 px-4 lg:px-6 h-16  items-center bg-white bg-opacity-80 backdrop-blur-md shadow-sm mt-0">
       <nav
         aria-label="Global"
         className="flex items-center justify-between p-6 lg:px-8"
       >
         <div className="flex lg:flex-1">
-          <Logo title="Next Starter Pro" href="/" />
+          <Logo title="Requisi" href="/" />
         </div>
         <div className="flex lg:hidden">
           <button

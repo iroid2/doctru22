@@ -22,7 +22,7 @@ export async function createDocument(data: CreateDocumentData) {
             description,
             documentLink,
             // Remove or comment out the qrCode line
-            // qrCode: qrCode as unknown as string,
+            qrCode: qrCode as unknown as string,
             userId,
             hodStatus: false,
             secretaryStatus: false,

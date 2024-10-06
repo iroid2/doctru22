@@ -50,16 +50,6 @@ export default function IndividualDashboardV3({allDocuments}:{allDocuments:any})
   console.log(currentUserId);
   const documents = allDocuments?.filter((doc: any) => doc.userId === currentUserId);
  
-  // useEffect(() => {
-  //   if (status === "authenticated" && session?.user) {
-  //     const currentUserId = session.user.id;
-  //     const userDocuments = allDocuments?.filter((doc: any) => doc.userId === currentUserId);
-  //     setDocuments(userDocuments);
-  //   }
-  // }, [allDocuments, session, status]);
-
-
- 
 
   // Hook to handle document uploads using UploadThing
   const { startUpload, isUploading } = useUploadThing("requisitionDocuments");
@@ -70,13 +60,6 @@ export default function IndividualDashboardV3({allDocuments}:{allDocuments:any})
         <h1 className="text-2xl font-bold">My Requisitions Dashboard</h1>
         <div className="flex items-center space-x-4">
           <Link href="/dashboard/userdashboard/new" className="bg-slate-950 px-4 py-1 rounded-lg text-white">Create Requisition</Link>
-          <Button variant="outline" size="icon">
-            <Bell className="h-4 w-4" />
-          </Button>
-          <Avatar>
-            <AvatarImage src="/placeholder-user.jpg" alt="User" />
-            <AvatarFallback>JD</AvatarFallback>
-          </Avatar>
         </div>
       </header>
 
@@ -126,8 +109,8 @@ export default function IndividualDashboardV3({allDocuments}:{allDocuments:any})
                     </div>
                   </div>
                   <div className="mt-4">
-                
-                <img src={req.qrCode} className="w-24 h-25" alt="QR Code" />
+                  <img src={req.qrCode} className="w-12 h-12" alt="QR Code" />
+                {/* <img src={req.qrCode} className="w-24 h-25" alt="QR Code" /> */}
               </div>
                   <Badge>{req.documentStatus}</Badge>
                 </div>

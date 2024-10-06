@@ -30,22 +30,23 @@ export default function CreateRequisitionForm() {
 
   // Automatically generate QR code when the PDF URL is set
   useEffect(() => {
+    async function generateQrCode() {
+      try {
+        if (pdfUrl) {
+          const dataUrl = await QRCode.toDataURL(pdfUrl);
+          setQrUrl(dataUrl);
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Failed to generate QR code.");
+      }
+    }
     if (pdfUrl) {
       generateQrCode();
     }
   }, [pdfUrl]);
 
-  async function generateQrCode() {
-    try {
-      if (pdfUrl) {
-        const dataUrl = await QRCode.toDataURL(pdfUrl);
-        setQrUrl(dataUrl);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("Failed to generate QR code.");
-    }
-  }
+  
 
   async function onSubmit(data: any) {
     if (status !== "authenticated" || !session?.user) {
@@ -55,7 +56,7 @@ export default function CreateRequisitionForm() {
     data.userId = session.user.id;
     data.documentLink = pdfUrl;
     data.qrCode = qrUrl; // Set the QR code URL to the form data
-    console.log(data)
+    console.log(data);
 
     try {
       const res = await createDocument(data);
